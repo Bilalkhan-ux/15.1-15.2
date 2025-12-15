@@ -1,6 +1,8 @@
 #pragma once
 #include <iostream>
 #include "employee.h"
+#include "date.h"
+
 using namespace std;
 
 class ProdWorker : public Employee
@@ -8,9 +10,10 @@ class ProdWorker : public Employee
 private:
     int shift;
     double hourlyPayRate;
+    Date d;
 
 public:
-    ProdWorker(string n, string d, int num, int s, double h) : Employee(n, d, num), shift(s), hourlyPayRate(h) {}
+    ProdWorker(char *n, int num, int s, double h, Date date) : Employee(n, num), shift(s), hourlyPayRate(h), d(date) {}
 
     void setShift(int s) { shift = s; }
     void setRate(double r) { hourlyPayRate = r; }
@@ -20,10 +23,18 @@ public:
 
     void display()
     {
+        cout << "====EMPLOYEE DATA====\n";
         cout << "Name: " << name << endl;
-        cout << "Date of hiring: " << hireDate << endl;
+        cout << "Date of hiring: " << endl;
+        d.display();
         cout << "Number: " << empNumber << endl;
-        cout << "Shift: " << shift << endl;
+        cout << "Shift: ";
+        if (shift == 1)
+        {
+            cout << "Morning\n";
+        }
+        else
+            cout << "Evening\n";
         cout << "Hourly pay rate: " << hourlyPayRate << endl;
     }
 };
