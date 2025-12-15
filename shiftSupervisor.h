@@ -1,13 +1,15 @@
 #pragma once
 #include "employee.h"
+#include "date.h"
 class ShiftSupervisor : public Employee
 {
 private:
     double annualSalary;
     double annualBonus;
+    Date d;
 
 public:
-    ShiftSupervisor(string n, string d, int num, double s, double b) : Employee(n, d, num), annualSalary(s), annualBonus(b) {}
+    ShiftSupervisor(char *n, int num, double s, double b, Date date) : Employee(n, num), annualSalary(s), annualBonus(b), d(date) {}
 
     void setSalary(double s) { annualSalary = s; }
     void setBonus(double s) { annualBonus = s; }
@@ -17,8 +19,10 @@ public:
 
     void display() const
     {
+        cout << "====SuperVisor Data====\n";
         cout << "Name: " << name << endl;
-        cout << "Date of hiring: " << hireDate << endl;
+        cout << "Date of hiring: " << endl;
+        d.display();
         cout << "Number: " << empNumber << endl;
         cout << "Annual salary: " << annualSalary << endl;
         cout << "Bonus: " << annualBonus << endl;
