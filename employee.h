@@ -1,21 +1,32 @@
 #pragma once
 #include <iostream>
+#include <cstring>
+#include "date.h"
 using namespace std;
 class Employee
 {
 protected:
-    string name;
-    string hireDate;
+    char *name;
     int empNumber;
 
 public:
-    Employee(string n, string h, int num) : name(n), hireDate(h), empNumber(num) {}
+    Employee(char *n, int num)
+    {
+        name = new char[strlen(n) + 1];
+        strcpy(name, n);
 
-    void setName(string n) { name = n; }
-    void setDate(string d) { hireDate = d; }
+        empNumber = num;
+    }
+    ~Employee() { delete[] name; }
+
+    void setName(char *n)
+    {
+        delete[] name;
+        name = new char[strlen(n) + 1];
+        strcpy(name, n);
+    }
     void setNum(int n) { empNumber = n; }
 
-    string getName() const { return name; }
-    string getDate() const { return hireDate; }
+    char *getName() const { return name; }
     int getNumber() const { return empNumber; }
 };
