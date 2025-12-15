@@ -5,8 +5,9 @@ using namespace std;
 
 int main()
 {
-    string name;
-    string date;
+    const int size = 50;
+    char *name = new char[size];
+    int date, month, year;
     int num;
     int shift;
     double rate;
@@ -19,11 +20,14 @@ int main()
     cin >> choice;
     if (choice)
     {
+
+        cout << "==========================\n";
         cout << "Enter name of employee: \n";
         cin.ignore();
-        getline(cin, name);
-        cout << "Enter date of hiring: \n";
-        cin >> date;
+        cin.getline(name, size);
+        cout << "Enter date of hiring (DD MM YYYY): \n";
+        cin >> date >> month >> year;
+        Date d1(date, month, year);
         cout << "Enter number of employee:: \n";
         cin >> num;
         cout << "Enter shift of employee: \n";
@@ -31,16 +35,19 @@ int main()
         cout << "Enter hourly pay rate of employee: \n";
         cin >> rate;
 
-        ProdWorker P(name, date, num, shift, rate);
+        ProdWorker P(name, num, shift, rate, d1);
         P.display();
     }
     else
     {
+        cout << "==========================\n";
         cout << "Enter name of employee: \n";
         cin.ignore();
-        getline(cin, name);
-        cout << "Enter date of hiring: \n";
-        cin >> date;
+        cin.getline(name, size);
+        cout << "Enter date of hiring (DD MM YYYY): \n";
+        cin >> date >> month >> year;
+        Date d2(date, month, year);
+
         cout << "Enter number of employee:: \n";
         cin >> num;
         cout << "Enter annual salary: \n";
@@ -48,9 +55,10 @@ int main()
         cout << "Enter bonus: \n";
         cin >> bonus;
 
-        ShiftSupervisor S(name, date, num, salary, bonus);
+        ShiftSupervisor S(name, num, salary, bonus, d2);
         S.display();
     }
+    delete[] name;
 
     return 0;
 }
